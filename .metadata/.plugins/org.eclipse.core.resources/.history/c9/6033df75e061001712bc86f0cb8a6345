@@ -1,0 +1,22 @@
+import java.awt.image.BufferedImage;
+
+public class ImageArray {
+	
+	int[][] data;
+	int height;
+	int width;
+	
+	public ImageArray(BufferedImage image){
+		height = image.getHeight();
+		width = image.getWidth();
+		for (int xPixel = 0; xPixel < width; xPixel++)
+		{
+			for (int yPixel = 0; yPixel < height; yPixel++)
+			{
+				int color = image.getRGB(xPixel, yPixel);
+				System.out.format("%x%n",color);
+			}
+		}
+	}
+
+}

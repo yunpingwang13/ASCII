@@ -1,0 +1,63 @@
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.util.Arrays;
+
+import javax.imageio.ImageIO;
+
+public class ImageReader {
+	public ImageArray readCharImage(int ascii) throws IOException {
+		BufferedImage image = ImageIO.read(new FileInputStream("res/Image"+ascii+".png"));
+
+		return new ImageArray(image, (char) ascii);
+	}
+	
+	public ImageArray readImage(String filename) throws IOException {
+		BufferedImage image = ImageIO.read(new FileInputStream(filename));
+
+		return new ImageArray(image);
+	}
+}
+
+class CharImageArray extends ImageArray{
+	
+}
+
+class ImageArray{
+	
+	int[][] data;
+	int height;
+	int width;
+	char ch;
+	
+	public ImageArray(BufferedImage image, char ch){
+		height = image.getHeight();
+		width = image.getWidth();
+		data = new int[height][width];
+		for (int yPixel = 0; yPixel < height; yPixel++)
+		{
+			for (int xPixel = 0; xPixel < width; xPixel++)
+			{
+				int color = image.getRGB(xPixel, yPixel);
+				if(color == 0xff000000){
+					data[yPixel][xPixel] = 0;
+				}
+				else{
+					data[yPixel][xPixel] = 1;
+				}
+			}
+		}
+		this.ch = ch;
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i<height;i++){
+			sb.append(Arrays.toString(data[i])+"\n");
+		}
+		return sb.toString();
+	}
+}

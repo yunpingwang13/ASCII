@@ -1,0 +1,37 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CharFitter {
+	
+	static final int start = 33;
+	static final int end = 126;
+	
+	List<CharImageArray> lst;
+	ImageReader reader = new ImageReader();
+	int chWidth, chHeight;
+	
+	public CharFitter(){
+		lst = new ArrayList<CharImageArray>();
+		for(int i = start;i<=end;i++){
+			try {
+				lst.add(reader.readCharImage(i));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		chWidth = lst.get(0).width;
+		chHeight = lst.get(0).height;
+	}
+	
+	public char[][] fit(ImageArray arr){
+		for(int i = 0;i<arr.height/chHeight;i++){
+			for(int j = 0;j<arr.height/chWidth;j++){
+				
+			}
+		}
+	}
+	
+
+}

@@ -1,0 +1,29 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+public class Driver {
+	
+	public static void main(String[] args){
+		System.out.println("Initializing");
+		ImageReader reader = new ImageReader();
+		System.out.println("Reader initialized");
+		try {
+			ImageArray arr = reader.readImage("test.jpg");
+			System.out.println("Source converted");
+			CharFitter fitter = new CharFitter();
+			System.out.println("Char loaded");
+			char[][] result = fitter.fit(arr);
+			System.out.println("Calculation done");
+			PrintWriter out = new PrintWriter( "result.txt" );
+			for(int i = 0;i<result.length;i++){
+				out.println(result[i]);
+			}
+			out.close();
+			System.out.println("Done");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

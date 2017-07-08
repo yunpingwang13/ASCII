@@ -1,0 +1,68 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CharFitter {
+	
+	static final int start = 33;
+	static final int end = 126;
+	
+	List<CharImageArray> lst;
+	ImageReader reader = new ImageReader();
+	int chWidth, chHeight;
+	
+	public CharFitter(){
+		lst = new ArrayList<CharImageArray>();
+		for(int i = start;i<=end;i++){
+			try {
+				lst.add(reader.readCharImage(i));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		chWidth = lst.get(0).width;
+		chHeight = lst.get(0).height;
+	}
+	
+//	public int similarity(int source, int comp){
+//		int r = (source & 0x00ff0000) >> 16;
+//		int g = (source & 0x0000ff00) >> 8;
+//		int b = (source & 0x000000ff);
+//	}
+	
+	public char[][] fit(ImageArray arr){
+		int resultHeight = (int)Math.ceil(arr.height/chHeight);
+		int resultWidth = (int)Math.ceil(arr.width/chWidth);
+		char[][] result = new char[resultHeight][resultWidth];
+		for(int i = 0;i<resultHeight;i++){
+			for(int j = 0;j<resultWidth;j++){
+				int maxScore = 0;
+				char maxChar = ' ';
+				for(CharImageArray ciarr : lst){
+					int score = 0;
+					for(int p = 0;p<chHeight;p++){
+						for(int q = 0;q<chWidth;q++){
+							int cval = ciarr.data[p][q];
+							int aval = arr.data[p+chHeight*i][q+chWidth*j];
+							if(cval == aval){
+								score++;
+							}
+						}
+					}
+					if(score>maxScore){
+						maxScore = score;
+						maxChar = ciarr.ch;
+					}
+				}
+				result[i][j] = maxChar;
+			}
+			if(i%(resultHeight/10)==0){
+				System.out.println("Calculation "+ (int)Math.ceil(((double)i/(double)resultHeight)*10)*10 +"% done");
+			}
+		}
+		return result;
+	}
+	
+
+}

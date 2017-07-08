@@ -1,0 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class CharFitter {
+	
+	static final int start = 33;
+	static final int end = 126;
+	
+	public CharFitter(ImageArray arr){
+		List<CharImageArray> lst = new ArrayList<CharImageArray>();
+		
+	}
+
+}

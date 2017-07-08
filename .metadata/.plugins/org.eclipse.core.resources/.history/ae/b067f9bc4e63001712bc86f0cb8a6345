@@ -1,0 +1,9 @@
+
+public class CharFitter {
+	
+	public CharFitter(ImageArray arr){
+		List<CharImageArray> lst = new ArrayList<CharImageArray>();
+		
+	}
+
+}

@@ -1,0 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class TextToImageDriver {
+	
+	public static void main(String[] args){
+		
+		TextToImage tti = new TextToImage();
+		List<Character> chs = new ArrayList<Character>();
+		
+		
+	}
+
+}

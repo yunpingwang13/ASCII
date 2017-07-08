@@ -1,0 +1,8 @@
+
+public class CharFitter {
+	
+	public CharFitter(ImageArray arr){
+		
+	}
+
+}

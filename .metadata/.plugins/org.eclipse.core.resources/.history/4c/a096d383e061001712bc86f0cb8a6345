@@ -1,0 +1,28 @@
+import java.awt.image.BufferedImage;
+
+public class ImageArray {
+	
+	int[][] data;
+	int height;
+	int width;
+	
+	public ImageArray(BufferedImage image){
+		height = image.getHeight();
+		width = image.getWidth();
+		data = new int[height][width];
+		for (int xPixel = 0; xPixel < width; xPixel++)
+		{
+			for (int yPixel = 0; yPixel < height; yPixel++)
+			{
+				int color = image.getRGB(xPixel, yPixel);
+				if(color == 0xff000000){
+					data[height][width] = 0;
+				}
+				else{
+					data[height][width] = 1;
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,44 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Driver {
+	
+	public static void main(String[] args){
+		System.out.println("Initializing");
+		ImageReader reader = new ImageReader();
+		System.out.println("Reader initialized");
+		int start = 33;
+		int end = 126;
+		int fontSize = 12;
+		
+		TextToImage tti = new TextToImage(fontSize);
+		List<Character> chs = new ArrayList<Character>();
+		for(int i = start;i<=end;i++){
+			chs.add((char)i);
+		}
+		List<CharImage> lst = tti.convert(chs);
+		tti.writeToFile(lst);
+		System.out.println("Char created");		
+		try {
+			ImageArray arr = reader.readImage("jimmy_normal.jpg");
+			System.out.println(arr);
+			System.out.println("Source converted");
+			CharFitter fitter = new CharFitter();
+			System.out.println("Char loaded");
+			char[][] result = fitter.fit(arr);
+			System.out.println("Calculation done");
+			PrintWriter out = new PrintWriter( "result.txt" );
+			for(int i = 0;i<result.length;i++){
+				out.println(result[i]);
+			}
+			out.close();
+			System.out.println("Done");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

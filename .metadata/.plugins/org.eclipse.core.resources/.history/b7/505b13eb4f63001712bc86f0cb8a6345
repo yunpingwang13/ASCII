@@ -1,0 +1,16 @@
+import java.io.IOException;
+
+public class Driver {
+	
+	public static void main(String[] args){
+		ImageReader reader = new ImageReader();
+		try {
+			ImageArray arr = reader.readImage("jimmy_normal.bmp");
+			CharFitter fitter = new CharFitter();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,10 @@
+
+public class BMPReaderTester {
+	
+	@Test
+	public void test(){
+		BMPReader reader = new BMPReader();
+		path = 
+	}
+
+}

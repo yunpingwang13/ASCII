@@ -1,0 +1,14 @@
+import java.io.IOException;
+
+public class BMPReaderTester {
+	
+	public static void main(String[] args){
+		BMPReader reader = new BMPReader();
+		String path = "Image33.bmp";
+		try {
+			System.out.println(reader.seeBMPImage(path));
+		} catch (IOException e) {
+		}
+	}
+
+}

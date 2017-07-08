@@ -1,0 +1,49 @@
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+
+import javax.imageio.ImageIO;
+
+public class ImageReader {
+	public ImageArray seeBMPImage(String BMPFileName) throws IOException {
+		BufferedImage image = ImageIO.read(new FileInputStream(BMPFileName));
+
+		return new ImageArray(image);
+	}
+}
+
+class ImageArray  implements Serializable{
+	
+	int[][] data;
+	int height;
+	int width;
+	
+	public ImageArray(BufferedImage image){
+		height = image.getHeight();
+		width = image.getWidth();
+		data = new int[height][width];
+		for (int yPixel = 0; yPixel < height; yPixel++)
+		{
+			for (int xPixel = 0; xPixel < width; xPixel++)
+			{
+				int color = image.getRGB(xPixel, yPixel);
+				if(color == 0xff000000){
+					data[yPixel][xPixel] = 0;
+				}
+				else{
+					data[yPixel][xPixel] = 1;
+				}
+			}
+		}
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0;i<height;i++){
+			sb.append(Arrays.toString(data[i])+"\n");
+		}
+		return sb.toString();
+	}
+}
